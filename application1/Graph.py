@@ -12,9 +12,11 @@ class Graph:
     #       False = naoDirecionado
     def __init__(self, directedGraph=False):
         self.__V = list()
-        self.__directedGraph = directedGraph
         self.__topological = list()
+        self.__directedGraph = directedGraph
         self.__time = 0
+        self.__isConnected = False
+        self.__isAcyclic = False
         return
     
     #AdicionaAresta -> chamada pelo método createVertex()
@@ -87,7 +89,7 @@ class Graph:
     #####################################################################
     #####################################################################
     #Busca em Profundidade Recursiva
-    def DFS_Rec(self, exploreObj=None):
+    def DFS_Rec(self, exploreObj=None, exploredResult=False):
         self.setVertexListAsUnexplored()
 
         self.__time = 0
@@ -115,7 +117,7 @@ class Graph:
         
         #Salva vértice na ordenação topológica do vértice
         self.addVertexTopological(vertex.getName())
-        
+
         #Imprime resultado dos vértice explorado
         vertex.explore(exploreObj)
         

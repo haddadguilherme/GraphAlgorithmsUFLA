@@ -52,7 +52,7 @@ class Vertex:
 
     def explore(self, exploreObj=None):
         if ((not self.__explored) and (exploreObj is not None)):
-            exploreObj.explore(self)
+            exploreObj.explore(self, False)
 
         self.__explored = True
 
@@ -116,5 +116,6 @@ class CExplore:
     def getInitialVertexIndex(self):
         return self.__initialVertexIndex
 
-    def explore(self, vertex):
-        print ("Explorando vertice: ", vertex.getIndex(), " d=", vertex.d, " f=", vertex.f)
+    def explore(self, vertex, display=False):
+        if(display == True):
+            print ("Explorando vertice: ", vertex.getIndex(), " d=", vertex.d, " f=", vertex.f)

@@ -52,10 +52,8 @@ for i in range(2, len(lines)):
     line = lines[i].split()
     graph.addEdge(int(line[0]), int(line[1]))
 
-print ("DFS Rec")
-graph.DFS_Rec(CExplore())
 
-print("Graph after DFS")
-print(graph)
-
+graph.DFS_Rec(CExplore(), False)
+print ("Done: DFS Rec")
+print ("Topological List")
 print(graph.getTopologicalSet())
