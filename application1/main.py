@@ -52,9 +52,6 @@ for i in range(2, len(lines)):
     line = lines[i].split()
     graph.addEdge(int(line[0]), int(line[1]))
 
-print("Graph")
-print(graph)
-
 print ("DFS Rec")
 graph.DFS_Rec(CExplore())
 
