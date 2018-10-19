@@ -1,5 +1,9 @@
+import numpy as np
+
 from Vertex import Vertex
 from Vertex import CExplore
+from Edge import Edge
+
 
 class Graph:
     #Incializa a Classe Graph
@@ -11,9 +15,6 @@ class Graph:
         self.__directedGraph = directedGraph
         self.__time = 0
         return
-
-    def __repr__(self):
-        return str(self.__V)
     
     #AdicionaAresta -> chamada pelo método createVertex()
     #param: @v = vértice, @index = indice do vértice
@@ -26,9 +27,6 @@ class Graph:
     #Cria vértice -> chama função addVertex() 
     def createVertex(self, index):
         return self.addVertex(Vertex(self), index)
-
-    def printList(self):
-        print ("Final List : ", self.__V.__getitem__)
 
     #Adiciona aresta
     def addEdge(self, u, v):
