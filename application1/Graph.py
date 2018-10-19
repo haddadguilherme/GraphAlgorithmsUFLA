@@ -13,6 +13,7 @@ class Graph:
     def __init__(self, directedGraph=False):
         self.__V = list()
         self.__directedGraph = directedGraph
+        self.__topological = list()
         self.__time = 0
         return
     
@@ -23,6 +24,14 @@ class Graph:
             v.setIndex(index)
             self.__V.insert(index-1, v)
         return v
+
+    def addVertexTopological(self, v):
+        if (not (v in self.__V)):
+            self.__topological.insert(0, v)
+        return v
+    
+    def getTopologicalSet(self):
+        return self.__topological
 
     #Cria vértice -> chama função addVertex() 
     def createVertex(self, index):
@@ -77,7 +86,7 @@ class Graph:
         return
     #####################################################################
     #####################################################################
-    #Busca em Profundidade
+    #Busca em Profundidade Recursiva
     def DFS_Rec(self, exploreObj=None):
         self.setVertexListAsUnexplored()
 
@@ -90,34 +99,34 @@ class Graph:
         return exploreObj
 
     def __DFS_VISIT_REC(self, vertex, exploreObj=None):
-
+        #Incrementa tempo e marca a abertura do vértice
         self.__time += 1
         vertex.d = self.__time
         
-
+        #Verifica todos vértices adjacentes ao vértice para chamar recursivamente a função
         for adjacentVertex in vertex.getAdjacentVertexSet():
             if(not adjacentVertex.wasExplored()):
                 adjacentVertex.predecessor = vertex
                 self.__DFS_VISIT_REC(adjacentVertex, exploreObj)
+        
+        #Incrementa o tempo e marca o fechamento do vértice
         self.__time += 1
         vertex.f = self.__time
+        
+        #Salva vértice na ordenação topológica do vértice
+        self.addVertexTopological(vertex.getName())
+        
+        #Imprime resultado dos vértice explorado
         vertex.explore(exploreObj)
+        
+        #Retorna o objeto explorado
         return exploreObj
     #####################################################################
     #####################################################################
 
     #Verifica se Graph é conexo
     def isConnected(self):
-
-        if (self.__directedGraph):
-            for v in self.__V:
-                self.setVertexListAsUnexplored()
-                self.DFS_Rec(None)
-                for u in self.__V:
-                    if (u.d == np.inf):
-                        return False
-            return True
-        return True
+        return self.DFS_Rec(CExplore())
 
     def isAcyclic(self):
         if (self.__directedGraph):

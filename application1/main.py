@@ -22,7 +22,6 @@ while loop:
     for root, dirs, files in os.walk("instances"):
         if path is None: # Evita encontrar dois arquivos com o mesmo nome
             for file in files:
-                print(file)
                 if arquivo in file:
                     print("\nArquivo encontrado!")
                     path = os.path.join(root, file)
@@ -31,11 +30,6 @@ while loop:
                     break # Evita encontrar dois arquivos com o mesmo nome
     
     if path is None:
-        #Limpar tela
-        if os.name == "nt":
-            os.system("cls")
-        else:
-            os.system("clear")
         print("\n" + 67 * "#")
         print("Arquivo nao encontrado! Certifique-se de estar rodando o sistema a partir da pasta raiz!")
         print("" + 67 * "#")
@@ -53,15 +47,18 @@ numberVertex = int(lines[1])
 for i in range(1, numberVertex+1, 1):
     graph.createVertex(i)
 
-
-# Popula o grafo
+#Adiciona arestas entre os vértices do grafo
 for i in range(2, len(lines)):
     line = lines[i].split()
-    u = line[0]
-    v = line[1]
-    graph.addEdge(int(u), int(v))
+    graph.addEdge(int(line[0]), int(line[1]))
 
 print("Graph")
 print(graph)
+
 print ("DFS Rec")
 graph.DFS_Rec(CExplore())
+
+print("Graph after DFS")
+print(graph)
+
+print(graph.getTopologicalSet())
