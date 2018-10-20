@@ -54,6 +54,11 @@ for i in range(2, len(lines)):
 
 
 graph.DFS_Rec(CExplore(), False)
-print ("Done: DFS Rec")
-print ("Topological List")
-print(graph.getTopologicalSet())
+
+teste = graph.getIsConnected()
+print(teste)
+if(teste == True):
+    print ("Topological List")
+    print(graph.getTopologicalSet())
+else:
+    print("Nao foi possivel encontrar o resultado. Grafo desconexo")

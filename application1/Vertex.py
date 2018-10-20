@@ -1,5 +1,5 @@
 import numpy as np
-from Edge import Edge
+
 
 class Vertex:
     #Inicializa Vértice

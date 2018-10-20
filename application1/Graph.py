@@ -2,7 +2,7 @@ import numpy as np
 
 from Vertex import Vertex
 from Vertex import CExplore
-from Edge import Edge
+
 
 
 class Graph:
@@ -15,8 +15,7 @@ class Graph:
         self.__topological = list()
         self.__directedGraph = directedGraph
         self.__time = 0
-        self.__isConnected = False
-        self.__isAcyclic = False
+        self.__isConnected = None
         return
     
     #AdicionaAresta -> chamada pelo método createVertex()
@@ -34,6 +33,9 @@ class Graph:
     
     def getTopologicalSet(self):
         return self.__topological
+    
+    def getIsConnected(self):
+        return self.__isConnected
 
     #Cria vértice -> chama função addVertex() 
     def createVertex(self, index):
@@ -93,10 +95,21 @@ class Graph:
         self.setVertexListAsUnexplored()
 
         self.__time = 0
-
+        #Partimos do presuposto que não é conectado
+        testIsConnected = False
+        
+        #Faz uma busca em profundidade e encontra uma componente conexa
         for vertex in self.__V:
-            if (not vertex.wasExplored()):
+            if (not vertex.wasExplored() and testIsConnected == False):
                 self.__DFS_VISIT_REC(vertex, exploreObj)
+                testIsConnected = True
+        
+        #Se a componente conexa encontrada pela DFS for do mesmo tamanho da lista de vértices
+        #o grafo é marcado como conexo, senão como não conexo
+        if(len(self.__topological) == len(self.__V)):
+            self.__isConnected = True
+        else:
+            self.__isConnected = False
 
         return exploreObj
 
@@ -125,17 +138,3 @@ class Graph:
         return exploreObj
     #####################################################################
     #####################################################################
-
-    #Verifica se Graph é conexo
-    def isConnected(self):
-        return self.DFS_Rec(CExplore())
-
-    def isAcyclic(self):
-        if (self.__directedGraph):
-            self.DFS_Rec(None)
-            for u in self.__V:
-                for v in u.getAdjacentVertexSet():
-                    if (Edge.isBackEdge(u, v)):
-                        return False
-            return True
-        return False
