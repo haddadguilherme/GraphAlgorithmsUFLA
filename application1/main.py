@@ -42,8 +42,11 @@ if("UNDIRECTED" in lines[0]):
 else:
     directedGraph = True
 
+#Instanciando o objeto
 graph = Graph(directedGraph)
+#Na linha 01, busca o número de vértices do grafo
 numberVertex = int(lines[1])
+#Inicializa os número de vértices lido aruqivo
 for i in range(1, numberVertex+1, 1):
     graph.createVertex(i)
 
@@ -52,13 +55,14 @@ for i in range(2, len(lines)):
     line = lines[i].split()
     graph.addEdge(int(line[0]), int(line[1]))
 
+#Realiza a busca em profundidade
+#A DFS foi modificada para atender o problema. Ela é executada SOMENTE para uma componente do grafo
+#Se essa componente for completa, é feita possível "ver" a ordenação topologica, 
+#caso contrário o programa exibe mensagem de erro ao encontrar resultado
+graph.DFS_Rec(CExplore())
 
-graph.DFS_Rec(CExplore(), False)
-
-teste = graph.getIsConnected()
-print(teste)
-if(teste == True):
-    print ("Topological List")
+#teste = graph.getIsConnected()
+if(graph.getIsConnected() == True):
     print(graph.getTopologicalSet())
 else:
     print("Nao foi possivel encontrar o resultado. Grafo desconexo")

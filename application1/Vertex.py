@@ -102,7 +102,7 @@ class CExplore:
             self._makeCalculations()
 
         else:
-            raise("Error! u and v must be of class Vertex or integers.")
+            raise("Erro! u e v precisam ser da classe Vertex ou do tipo inteiro.")
 
         return self
 

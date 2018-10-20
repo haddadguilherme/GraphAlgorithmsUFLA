@@ -7,9 +7,6 @@ from Vertex import CExplore
 
 class Graph:
     #Incializa a Classe Graph
-    #param: @directedGraph:
-    #value: True = direcionado
-    #       False = naoDirecionado
     def __init__(self, directedGraph=False):
         self.__V = list()
         self.__topological = list()
@@ -19,7 +16,6 @@ class Graph:
         return
     
     #AdicionaAresta -> chamada pelo método createVertex()
-    #param: @v = vértice, @index = indice do vértice
     def addVertex(self, v, index):
         if (not (v in self.__V)):
             v.setIndex(index)
@@ -31,9 +27,15 @@ class Graph:
             self.__topological.insert(0, v)
         return v
     
+    #Retorna a lista topológica do Grafo caso ele tenha
     def getTopologicalSet(self):
-        return self.__topological
+        str = "Ordenacao de Atividades: "
+        for vertex in self.__topological:
+            str += vertex+" "
+        return str
     
+    #Retorna se o grafo é conectado.
+    #Valor é instanciado após a DFS ser executada. Antes disso, o valor é None
     def getIsConnected(self):
         return self.__isConnected
 
@@ -58,11 +60,11 @@ class Graph:
                 return
             #Se u e v não estiverem na lista __V do Graph, retorna erro
             else:
-                raise("Erro método 'addEdge'. u e v não pertence ao grafo.")
+                raise("Erro metodo 'addEdge'. u e v nao pertence ao grafo.")
         elif (isinstance(u, int) and isinstance(v, int)):
             self.addEdge(self[u-1], self[v-1])
         else:
-            raise("Erro método 'addEdge'. u e v não são do tipo Vertex ou Int.")
+            raise("Erro metodo 'addEdge'. u e v não sao do tipo Vertex ou Int.")
         return
     
     #Busca vértice na posição k pertence a lista __V de Graph
@@ -71,6 +73,7 @@ class Graph:
             return self.__V[k]
         return None
 
+    #Retorna tamnho da lista de vértices adjacentes
     def __len__(self):
         return len(self.__V)
     
@@ -91,10 +94,13 @@ class Graph:
     #####################################################################
     #####################################################################
     #Busca em Profundidade Recursiva
+    #Obs: o parâmetro exploredResult=False "inibe" a impressão da exploração dos vértices. Caso queira visualizar, basta passar True
     def DFS_Rec(self, exploreObj=None, exploredResult=False):
+        
+        #Cria lista de vértices não explorados
         self.setVertexListAsUnexplored()
-
         self.__time = 0
+        
         #Partimos do presuposto que não é conectado
         testIsConnected = False
         
