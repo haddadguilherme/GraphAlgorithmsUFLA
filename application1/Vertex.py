@@ -2,14 +2,14 @@ import numpy as np
 
 
 class Vertex:
-    #Inicializa Vértice
+    # Inicializa Vértice
     def __init__(self, parentGraph, index=0):
         self.__parentGraph = parentGraph
         self.__index = index
         self.__adjacentVertexSet = list()
         self.__explored = False
         self.__name = ""
-        #Documentação numpy.inf : https://www.numpy.org/devdocs/reference/constants.html
+        # Documentação numpy.inf : https://www.numpy.org/devdocs/reference/constants.html
         self.d = np.inf
         self.f = np.inf
         self.predecessor = None
@@ -80,8 +80,9 @@ class Vertex:
     def __str__(self):
         return self.vertex2str(True)
 
+
 class CExplore:
-    def __init__(self, graph = None):
+    def __init__(self, graph=None):
         self._graph = graph
         self.__initialVertexIndex = 0
         self._indexVertex1 = -1
@@ -117,5 +118,5 @@ class CExplore:
         return self.__initialVertexIndex
 
     def explore(self, vertex, display=False):
-        if(display == True):
-            print ("Explorando vertice: ", vertex.getIndex(), " d=", vertex.d, " f=", vertex.f)
+        if(display is True):
+            print("Explorando vertice: ", vertex.getIndex(), " d=", vertex.d, " f=", vertex.f)
