@@ -33,9 +33,9 @@ while loop:
                     break  # Evita encontrar dois arquivos com o mesmo nome
 
     if path is None:
-        print("\n" + 67 * "#")
+        print("\n" + 90 * "#")
         print("Arquivo nao encontrado! Certifique-se de estar rodando o sistema a partir da pasta raiz!")
-        print("" + 67 * "#")
+        print("" + 90 * "#")
 # Lê arquivo
 lines = readArq(path)
 

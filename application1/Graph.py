@@ -25,14 +25,14 @@ class Graph:
         if (not (v in self.__V)):
             self.__topological.insert(0, v)
         return v
-    
+
     # Retorna a lista topológica do Grafo caso ele tenha
     def getTopologicalSet(self):
-        str = "Ordenacao de Atividades: "
+        str = "Solução encontrada! \nOrdem de visitação das atividades: "
         for vertex in self.__topological:
             str += vertex+" "
         return str
-    
+
     # Retorna se o grafo é conectado.
     # Valor é instanciado após a DFS ser executada. Antes disso, o valor é None
     def getIsConnected(self):
@@ -128,23 +128,23 @@ class Graph:
         # Incrementa tempo e marca a abertura do vértice
         self.__time += 1
         vertex.d = self.__time
-        
+
         # Verifica todos vértices adjacentes ao vértice para chamar recursivamente a função
         for adjacentVertex in vertex.getAdjacentVertexSet():
             if(not adjacentVertex.wasExplored()):
                 adjacentVertex.predecessor = vertex
                 self.__DFS_VISIT_REC(adjacentVertex, exploreObj)
-        
+
         # Incrementa o tempo e marca o fechamento do vértice
         self.__time += 1
         vertex.f = self.__time
-        
+
         # Salva vértice na ordenação topológica do vértice
         self.addVertexTopological(vertex.getName())
 
         # Imprime resultado dos vértice explorado
         vertex.explore(exploreObj)
-        
+
         # Retorna o objeto explorado
         return exploreObj
     #####################################################################
