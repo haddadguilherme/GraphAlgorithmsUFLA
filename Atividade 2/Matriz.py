@@ -12,32 +12,32 @@ def lerArquivo(path):
 def criaMatrizOriginal():
 
     for i in range(1, intersecoes+1):
-    elementos = linhasArquivo[i].split()
+        elementos = linhasArquivo[i].split()
 
     for n in range(len(elementos)):
         elementos[n] = int(elementos[n])
 
         if elementos[n] == i:
-        matrizDistancia[i-1][i-1] = 0
+            matrizDistancia[i-1][i-1] = 0
 
         else:
-        matrizDistancia[i-1][(elementos[n]-1)] = 1
+            matrizDistancia[i-1][(elementos[n]-1)] = 1
 
 
 # Criação da matriz com as interseções propostas
 def criaMatrizSugerida():
 
     for i in range(1, intersecoes+1):
-    elementos = linhasArquivo[i+intersecoes].split()
+        elementos = linhasArquivo[i+intersecoes].split()
 
     for n in range(len(elementos)):
         elementos[n] = int(elementos[n])
 
         if elementos[n] == i:
-        matrizDistancia2[i-1][i-1] = 0
+            matrizDistancia2[i-1][i-1] = 0
 
         else:
-        matrizDistancia2[i-1][(elementos[n]-1)] = 1
+            matrizDistancia2[i-1][(elementos[n]-1)] = 1
 
 
 # Floyd-Warshall
