@@ -63,14 +63,6 @@ def validarProposta(matrizOriginal, matrizSugerida):
     print(resultado)
 
 
-# Imprimir matriz
-def exibirMatriz(matriz):
-
-    print("\n")
-    for elementos in matriz:
-        print(elementos)
-
-
 linhasArquivo = lerArquivo(
     "/home/gustavo/git/GraphAlgorithmsUFLA/Implementação 2/entrada2.txt")
 intersecoes = int(linhasArquivo[0])
