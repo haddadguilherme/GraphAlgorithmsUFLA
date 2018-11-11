@@ -1,4 +1,5 @@
 import sys
+import os
 
 
 # Leitura do arquivo
@@ -31,8 +32,30 @@ def validarProposta(matrizOriginal, matrizSugerida):
     print(resultado)
 
 
-linhasArquivo = lerArquivo(
-    "/home/gustavo/git/GraphAlgorithmsUFLA/Atividade 2/entrada1.txt")
+loop = True
+while loop:
+
+    arquivo = input("Digite o nome do arquivo a ser lido: ")
+    path = None
+
+    # Navega pela pasta a procura do arquivo
+    for root, dirs, files in os.walk("instances"):
+        if path is None:  # Evita encontrar dois arquivos com o mesmo nome
+            for file in files:
+                if arquivo in file:
+                    print("\nArquivo encontrado!")
+                    path = os.path.join(root, file)
+                    print("Caminho: " + path + "\n")
+                    loop = False
+                    break  # Evita encontrar dois arquivos com o mesmo nome
+
+    if path is None:
+        print("\n" + 90 * "#")
+        print("Arquivo não encontrado! Certifique-se de estar rodando o sistema a partir da pasta raiz!")
+        print("" + 90 * "#")
+
+
+linhasArquivo = lerArquivo(path)
 intersecoes = int(linhasArquivo[0])
 fator = int(linhasArquivo[intersecoes*2+1][0])
 constante = int(linhasArquivo[intersecoes*2+1][2])
