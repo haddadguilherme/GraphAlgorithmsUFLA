@@ -8,38 +8,6 @@ def lerArquivo(path):
     return arquivo.readlines()
 
 
-# Criação da matriz com as interseções originais
-def criaMatrizOriginal():
-
-    for i in range(1, intersecoes+1):
-        elementos = linhasArquivo[i].split()
-
-    for n in range(len(elementos)):
-        elementos[n] = int(elementos[n])
-
-        if elementos[n] == i:
-            matrizDistancia[i-1][i-1] = 0
-
-        else:
-            matrizDistancia[i-1][(elementos[n]-1)] = 1
-
-
-# Criação da matriz com as interseções propostas
-def criaMatrizSugerida():
-
-    for i in range(1, intersecoes+1):
-        elementos = linhasArquivo[i+intersecoes].split()
-
-    for n in range(len(elementos)):
-        elementos[n] = int(elementos[n])
-
-        if elementos[n] == i:
-            matrizDistancia2[i-1][i-1] = 0
-
-        else:
-            matrizDistancia2[i-1][(elementos[n]-1)] = 1
-
-
 # Floyd-Warshall
 def calcularMenoresDistancias(matriz):
 
@@ -64,7 +32,7 @@ def validarProposta(matrizOriginal, matrizSugerida):
 
 
 linhasArquivo = lerArquivo(
-    "/home/gustavo/git/GraphAlgorithmsUFLA/Implementação 2/entrada2.txt")
+    "/home/gustavo/git/GraphAlgorithmsUFLA/Atividade 2/entrada1.txt")
 intersecoes = int(linhasArquivo[0])
 fator = int(linhasArquivo[intersecoes*2+1][0])
 constante = int(linhasArquivo[intersecoes*2+1][2])
@@ -72,6 +40,35 @@ constante = int(linhasArquivo[intersecoes*2+1][2])
 # Criação das matrizes de distância com valores inteiros máximos
 matrizDistancia = [[sys.maxsize] * intersecoes for i in range(intersecoes)]
 matrizDistancia2 = [[sys.maxsize] * intersecoes for i in range(intersecoes)]
+
+
+# Criação da matriz com as interseções originais
+for i in range(1, intersecoes+1):
+    elementos = linhasArquivo[i].split()
+
+    for n in range(len(elementos)):
+        elementos[n] = int(elementos[n])
+
+        if elementos[n] == i:
+            matrizDistancia[i-1][i-1] = 0
+
+        else:
+            matrizDistancia[i-1][(elementos[n]-1)] = 1
+
+
+# Criação da matriz com as interseções propostas
+for i in range(1, intersecoes+1):
+    elementos = linhasArquivo[i+intersecoes].split()
+
+    for n in range(len(elementos)):
+        elementos[n] = int(elementos[n])
+
+        if elementos[n] == i:
+            matrizDistancia2[i-1][i-1] = 0
+
+        else:
+            matrizDistancia2[i-1][(elementos[n]-1)] = 1
+
 
 # Atribui a menor distância entre todas interseções na matriz
 matrizDistancia = calcularMenoresDistancias(matrizDistancia)
