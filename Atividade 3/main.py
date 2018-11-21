@@ -4,12 +4,10 @@ import os
 def print_menu_arquivo():
     print("\nDigite o nome do arquivo a ser lido:")
 
-
 # Leitura do arquivo
 def readArq(path):
     arq = open(path, 'r')
     return arq.readlines()
-
 
 loop = True
 while loop:
@@ -35,7 +33,6 @@ while loop:
 
 status = True
 listComputers = ["_","_","_","_","_","_","_","_","_","_"]
-#print(listComputers)
 
 # Lê arquivo
 linesOfArq = readArq(path)
@@ -72,9 +69,9 @@ for i in range(len(linesOfArq)):
         break
         
 if status == True:
-    respost = ""
+    answer = ""
     for computer in listComputers:
-        respost += computer+" "
-    print(respost)  
+        answer += computer+" "
+    print(answer)  
 else:
     print("!")
