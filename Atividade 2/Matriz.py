@@ -32,6 +32,7 @@ def validarProposta(matrizOriginal, matrizSugerida):
     print(resultado)
 
 
+# Menu para seleção do arquivo de entrada
 loop = True
 while loop:
 
@@ -56,6 +57,7 @@ while loop:
 
 
 linhasArquivo = lerArquivo(path)
+
 intersecoes = int(linhasArquivo[0])
 fator = int(linhasArquivo[intersecoes*2+1][0])
 constante = int(linhasArquivo[intersecoes*2+1][2])
