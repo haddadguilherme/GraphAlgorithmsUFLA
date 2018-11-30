@@ -1,28 +1,27 @@
 import os
-# Python program to find  
-# maximal Bipartite matching. 
+
 class GFG: 
     def __init__(self,graph): 
           
         # Grafo 
-        self.status = False
-        self.graph = graph  
-        self.app = len(graph) #aplicações
-        self.computers = len(graph[0])-2 #computadores
-        self.numberOfApp = list() #lista de qtd EXIGIDA de app's a serem inicializados
-        self.nameOfApp = list() #nome dos app's
-        for v in range(self.app):
-            self.numberOfApp.append(self.graph[v][10])
-            self.nameOfApp.append(self.graph[v][11])
+        self.__status = False
+        self.__graph = graph  
+        self.__app = len(graph) #aplicações
+        self.__computers = len(graph[0])-2 #computadores
+        self.__numberOfApp = list() #lista de qtd EXIGIDA de app's a serem inicializados
+        self.__nameOfApp = list() #nome dos app's
+        for v in range(self.__app):
+            self.__numberOfApp.append(self.__graph[v][10])
+            self.__nameOfApp.append(self.__graph[v][11])
 
     def getNameOfApp(self, app):
-        return self.nameOfApp[app]
+        return self.__nameOfApp[app]
     
     def getNumberOfApp(self, app):
-        return int(self.numberOfApp[app])
+        return int(self.__numberOfApp[app])
 
     def getStatus(self):
-        return self.status
+        return self.__status
 
    
     # Uma função recursiva baseada em DFS
@@ -30,12 +29,12 @@ class GFG:
     # se uma correspondência para o vértice u for possível
     def bpm(self, u, matchR, seen): 
   
-        # Try every job one by one 
-        for v in range(self.computers): 
+        # Testa todos os computadores um a um 
+        for v in range(self.__computers): 
   
             # Se a aplicação estiver interessada no computador
             # e o computador não estiver visitado
-            if self.graph[u][v] and seen[v] == False: 
+            if self.__graph[u][v] and seen[v] == False: 
                   
                 # Marca V como visitado
                 seen[v] = True 
@@ -53,7 +52,7 @@ class GFG:
                     return True
         return False
   
-    # Retorna o número máximo de correspondência
+    # Retorna o matriz de match máximo
     # Maximum Bipartite Matching (MBP) 
     def maxBPM(self): 
         '''
@@ -62,14 +61,14 @@ class GFG:
         da aplicação atribuído ao computador i, 
         o valor -1 indica que ninguém está atribuído.
         '''
-        matchR = ["_"] * self.computers 
+        matchR = ["_"] * self.__computers 
           
-        # Count of jobs assigned to applicants 
+        # Contador de número de aplicações alocadas 
         result = 0 
-        for i in range(self.app): 
+        for i in range(self.__app): 
               
             # Marcar todos os trabalhos como não vistos para o próximo computador. 
-            seen = [False] * self.computers 
+            seen = [False] * self.__computers 
 
             for j in range(self.getNumberOfApp(i)):
                 # Descubra se a aplicação 'u' pode conseguir um computador
@@ -77,9 +76,9 @@ class GFG:
                     result += 1
             
             if result == self.getNumberOfApp(i):
-                self.status = True
+                self.__status = True
             else:
-                self.status = False
+                self.__status = False
             result = 0
         return matchR 
 
@@ -147,8 +146,10 @@ for i in range (len(linesOfArq)):
     lista.append(nameApplication)
     bpGraph.append(lista)
 
-
+#Instancia o objeto GFG
 g = GFG(bpGraph) 
+
+#Lista auxiliar para substituir corretamento os nomes das aplicações
 aux = list()
 aux = g.maxBPM()
 for i in range (len(aux)):
