@@ -59,8 +59,8 @@ while loop:
 linhasArquivo = lerArquivo(path)
 
 intersecoes = int(linhasArquivo[0])
-fator = int(linhasArquivo[intersecoes*2+1][0])
-constante = int(linhasArquivo[intersecoes*2+1][2])
+fator = int(linhasArquivo[intersecoes*2+1][0]) # Conteúdo da última linha do arquivo de entrada na posição [0]
+constante = int(linhasArquivo[intersecoes*2+1][2]) # Conteúdo da última linha do arquivo de entrada na posição [2]
 
 # Criação das matrizes de distância com valores inteiros máximos
 matrizDistancia = [[sys.maxsize] * intersecoes for i in range(intersecoes)]
@@ -74,7 +74,8 @@ for i in range(1, intersecoes+1):
     for n in range(len(elementos)):
         elementos[n] = int(elementos[n])
 
-        if elementos[n] == i:
+        # Quando interseção liga a ela própria, distância é igual a 0. (Diagonal principal)
+        if elementos[n] == i: 
             matrizDistancia[i-1][i-1] = 0
 
         else:
@@ -88,6 +89,7 @@ for i in range(1, intersecoes+1):
     for n in range(len(elementos)):
         elementos[n] = int(elementos[n])
 
+        # Quando interseção liga a ela própria, distância é igual a 0. (Diagonal principal)
         if elementos[n] == i:
             matrizDistancia2[i-1][i-1] = 0
 
